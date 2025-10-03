@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BiCamera, BiPencil, BiPlus, BiUser } from "react-icons/bi";
-import { FaEdit, FaSearch, FaTimes } from "react-icons/fa";
+import { FaSearch, FaTimes } from "react-icons/fa";
+import { FiSettings } from "react-icons/fi";
 import { RiEmotionSadLine } from "react-icons/ri";
 
 // --- Mock Data ---
@@ -142,7 +143,7 @@ const MyStoryCard = () => (
                 </div>
             </div>
             <div className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                <FaEdit size={22} className="text-blue-500" />
+                <FiSettings size={22} className="text-blue-500" />
             </div>
         </div>
     </button>
