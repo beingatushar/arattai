@@ -174,7 +174,7 @@ interface StoryGridProps {
 const StoryGrid = ({ stories, isLoading }: StoryGridProps) => {
     if (isLoading) {
         return (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 p-4">
                 {Array.from({ length: 10 }).map((_, index) => (
                     <StorySkeleton key={index} />
                 ))}
@@ -193,7 +193,7 @@ const StoryGrid = ({ stories, isLoading }: StoryGridProps) => {
     }
 
     return (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 p-4">
             {stories.map((story) => (
                 <StoryCard key={story.id} story={story} />
             ))}
@@ -229,7 +229,7 @@ const StoriesPage = () => {
 
     return (
         // --- Page Layout ---
-        <main className="p-4 md:p-6 h-full bg-gray-50 dark:bg-gray-900 min-h-screen">
+        <main className="p-4 md:p-6 h-full bg-gray-50 dark:bg-gray-900 min-h-screen relative">
             <StoriesHeader
                 isSearchOpen={isSearchOpen}
                 setSearchOpen={setSearchOpen}
