@@ -1,5 +1,5 @@
 import { BiCalendarX } from "react-icons/bi";
-import { MdOutlineSchedule } from "react-icons/md";
+import { MdOutlineSchedule, MdPersonAdd, MdVideoCall } from "react-icons/md";
 import MeetingTabs from "../components/MeetingTabs";
 import QuickActionButton from "../components/QuickActionButton";
 import QuickStats from "../components/QuickStats";
@@ -9,13 +9,13 @@ const MeetingsPage = () => (
     <PageLayout title="📞 Meetings">
         <div className="grid grid-cols-3 gap-4 mb-8">
             <QuickActionButton
-                icon={<MdOutlineSchedule size={28} />}
+                icon={<MdVideoCall size={28} />}
                 label="Meet Now"
                 description="Start instant meeting"
                 color="green"
             />
             <QuickActionButton
-                icon={<MdOutlineSchedule size={28} />}
+                icon={<MdPersonAdd size={28} />}
                 label="Join"
                 description="Plan for later"
                 color="yellow"
