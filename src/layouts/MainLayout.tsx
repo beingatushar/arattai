@@ -1,7 +1,7 @@
 import { useDrag } from "@use-gesture/react";
 import { type ReactNode } from "react";
 import Sidebar from "../components/Sidebar";
-import { useUI } from "../context/UIContext";
+import { useUI } from "../hooks/useUI";
 
 type MainLayoutProps = {
     children: ReactNode;

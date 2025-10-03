@@ -1,6 +1,6 @@
 import MainScreen from "./components/MainScreen";
 import Navbar from "./components/Navbar";
-import { UIProvider } from "./context/UIContext";
+import { UIProvider } from "./context/UIProvider";
 import MainLayout from "./layouts/MainLayout";
 
 const App = () => {

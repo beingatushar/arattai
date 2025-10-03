@@ -2,7 +2,7 @@ import { useDrag } from "@use-gesture/react";
 import { FaMoon, FaTimes, FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { navLinks } from "../constants";
-import { useUI } from "../context/UIContext";
+import { useUI } from "../hooks/useUI";
 
 const Sidebar = () => {
     // Get all state and functions from the context
