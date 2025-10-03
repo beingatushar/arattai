@@ -9,7 +9,7 @@ const Navbar = () => {
     const location = useLocation();
 
     return (
-        <nav className="flex items-center p-1 bg-gray-800 shadow-lg w-full">
+        <nav className="fixed left-0 bottom-0 flex items-center p-1 bg-gray-800 shadow-lg w-full">
             {navItems.map((item) => {
                 const { id, label, icon: Icon } = item;
 

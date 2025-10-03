@@ -7,11 +7,12 @@ const App = () => {
     return (
         <UIProvider>
             <MainLayout>
-                <div className="flex flex-col h-screen">
-                    <MainScreen />
-                    <Navbar />
-                </div>
+                {/* <div className="flex flex-col h-screen"> */}
+                <MainScreen />
+                {/* </div> */}
             </MainLayout>
+
+            <Navbar />
         </UIProvider>
     );
 };

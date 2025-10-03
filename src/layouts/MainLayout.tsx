@@ -40,7 +40,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
             )}
 
             {/* Main content is passed in as children */}
-            <main className="flex flex-col flex-1">{children}</main>
+            <main className="flex flex-col flex-1 mb-15">{children}</main>
         </div>
     );
 };
