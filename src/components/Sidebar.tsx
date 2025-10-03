@@ -1,0 +1,83 @@
+import { useDrag } from "@use-gesture/react";
+import { FaMoon, FaTimes, FaUserCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { navLinks } from "../constants";
+import { useUI } from "../context/UIContext";
+
+const Sidebar = () => {
+    // Get all state and functions from the context
+    const { isSidebarOpen, closeSidebar, isNightMode, toggleNightMode } =
+        useUI();
+
+    const bindCloseGesture = useDrag(({ last, movement: [mx] }) => {
+        if (last && mx < -50) {
+            closeSidebar(); // Use the function from context
+        }
+    });
+
+    return (
+        <aside
+            {...bindCloseGesture()}
+            className={`
+                fixed top-0 left-0 h-screen w-72 bg-gray-800 text-gray-200 flex flex-col shadow-2xl z-30
+                transform transition-transform duration-300 ease-in-out touch-none
+                ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+            `}
+        >
+            <button
+                onClick={closeSidebar}
+                className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-700 transition-colors"
+                aria-label="Close sidebar"
+            >
+                <FaTimes size={20} />
+            </button>
+            {/* Profile Section */}
+            <div className="flex flex-col items-center justify-center p-6">
+                <FaUserCircle size={80} className="text-gray-500 mb-3" />
+                <h2 className="font-bold text-xl text-white">Jessica Smith</h2>
+            </div>
+
+            {/* Links Section */}
+            <nav className="flex-grow p-4">
+                <ul className="space-y-2">
+                    {navLinks.map((link) => {
+                        const Icon = link.icon;
+                        return (
+                            <li key={link.name}>
+                                <Link
+                                    to={`/${link.name.toLowerCase().replace(/ /g, "-")}`}
+                                    className="flex items-center p-3 text-base rounded-lg hover:bg-gray-700 hover:text-white transition-colors duration-200"
+                                >
+                                    <Icon className="w-6 h-6 mr-4" />
+                                    <span>{link.name}</span>
+                                </Link>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </nav>
+
+            {/* Night Mode Section */}
+            <div className="p-6 border-t border-gray-700">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                        <FaMoon className="w-6 h-6 mr-4" />
+                        <span className="text-base">Night mode</span>
+                    </div>
+                    <button
+                        onClick={toggleNightMode} // Use the function from context
+                        className={`w-14 h-7 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300
+                            ${isNightMode ? "bg-blue-500" : "bg-gray-600"}`} // Use state from context
+                    >
+                        <div
+                            className={`bg-white w-5 h-5 rounded-full shadow-md transform transition-transform duration-300
+                                ${isNightMode ? "translate-x-7" : ""}`} // Use state from context
+                        ></div>
+                    </button>
+                </div>
+            </div>
+        </aside>
+    );
+};
+
+export default Sidebar;
