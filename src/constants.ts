@@ -1,5 +1,12 @@
 import { FaUserFriends, FaCog } from "react-icons/fa";
-import { FaAt, FaBookmark, FaLink, FaMessage, FaPhone, FaStar } from "react-icons/fa6";
+import {
+    FaAt,
+    FaBookmark,
+    FaLink,
+    FaMessage,
+    FaPhone,
+    FaStar,
+} from "react-icons/fa6";
 import { LiaPaletteSolid } from "react-icons/lia";
 import { SlCalender } from "react-icons/sl";
 
