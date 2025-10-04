@@ -169,7 +169,7 @@ const ChatPage = () => {
                         </div>
                     </div>
                     <HiChevronRight
-                        className="text-gray-400 dark:text-gray-500 flex-shrink-0 ml-2 bg-gray-800"
+                        className="text-gray-400 bg-gray-900 rounded-full dark:text-gray-500 flex-shrink-0 ml-2"
                         size={28}
                     />
                 </button>
