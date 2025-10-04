@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import { FaSearch, FaTimes } from "react-icons/fa";
 import ActionButtons from "../components/ActionButtons";
 import MyStoryCard from "../components/MyStoryCard";
+import { SearchFAB } from "../components/SearchFAB";
 import StoryGrid from "../components/StoryGrid";
 import { MOCK_STORIES } from "../data/stories";
 import PageLayout from "../layouts/PageLayout";
 import type { Story } from "../types";
+import { SearchInput } from "../components/SearchInput";
 
 const StoriesPage = () => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -41,31 +42,18 @@ const StoriesPage = () => {
         <PageLayout
             title="📖 Stories"
             actionButton={
-                <button
-                    onClick={toggleSearch}
-                    className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-                    aria-label={isSearchOpen ? "Close search" : "Open search"}
-                >
-                    {isSearchOpen ? (
-                        <FaTimes size={20} className="dark:text-gray-300" />
-                    ) : (
-                        <FaSearch size={20} className="dark:text-gray-300" />
-                    )}
-                </button>
+                <SearchFAB
+                    isSearchOpen={isSearchOpen}
+                    onToggle={toggleSearch}
+                />
             }
         >
             {isSearchOpen && (
-                <div className="w-full mb-4">
-                    <input
-                        type="text"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search recent stories..."
-                        className="w-full px-3 py-2 bg-white dark:bg-gray-800 border rounded-lg 
-                                   focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all 
-                                   dark:text-white dark:border-gray-600"
-                    />
-                </div>
+                <SearchInput
+                    value={searchQuery}
+                    onChange={setSearchQuery}
+                    placeholder="Search recent stories..."
+                />
             )}
             <MyStoryCard />
             <section className="mt-8">
