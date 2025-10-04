@@ -5,10 +5,13 @@ import { UIContext } from "./UIContext";
 export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [isNightMode, setIsNightMode] = useState(false);
+    const [isLayoutVisible, setIsLayoutVisible] = useState(true);
 
     const openSidebar = () => setSidebarOpen(true);
     const closeSidebar = () => setSidebarOpen(false);
     const toggleNightMode = () => setIsNightMode((prev) => !prev);
+    const showLayout = () => setIsLayoutVisible(true);
+    const hideLayout = () => setIsLayoutVisible(false);
 
     const value = {
         isSidebarOpen,
@@ -16,6 +19,9 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
         closeSidebar,
         isNightMode,
         toggleNightMode,
+        isLayoutVisible,
+        showLayout,
+        hideLayout,
     };
 
     return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

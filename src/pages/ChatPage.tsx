@@ -1,5 +1,6 @@
 import { BiPlus } from "react-icons/bi";
 import { HiChevronRight, HiHeart } from "react-icons/hi";
+import { Link } from "react-router-dom";
 import { SearchFAB } from "../components/SearchFAB";
 import { SearchInput } from "../components/SearchInput";
 import { useChats } from "../hooks/useChats";
@@ -35,7 +36,7 @@ const ChatPage = () => {
             {isSearchOpen && (
                 <SearchInput
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={setSearchQuery}
                     placeholder="Search for chats..."
                 />
             )}
@@ -58,7 +59,8 @@ const ChatPage = () => {
 
             <div className="flex flex-col gap-2">
                 {chats.map((chat) => (
-                    <button
+                    <Link
+                        to={`/chat/${chat.id}`}
                         key={chat.id}
                         className="w-full text-left p-3 flex items-center gap-4 bg-white dark:bg-gray-800 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/60 transition-colors duration-200"
                     >
@@ -92,7 +94,7 @@ const ChatPage = () => {
                                 )}
                             </div>
                         </div>
-                    </button>
+                    </Link>
                 ))}
                 <button className="w-full text-left p-3 flex items-center gap-4 bg-white dark:bg-gray-800 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/60 transition-colors duration-200">
                     <div className="relative">

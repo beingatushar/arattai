@@ -6,6 +6,9 @@ export type UIContextType = {
     closeSidebar: () => void;
     isNightMode: boolean;
     toggleNightMode: () => void;
+    isLayoutVisible: boolean;
+    showLayout: () => void;
+    hideLayout: () => void;
 };
 
 // Create the context with a default value
