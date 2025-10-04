@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { BiCalendarX } from "react-icons/bi";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { MdOutlineSchedule, MdPersonAdd, MdVideoCall } from "react-icons/md";
 import MeetingTabs from "../components/MeetingTabs";
 import QuickActionButton from "../components/QuickActionButton";
-import QuickStats from "../components/QuickStats";
 import PageLayout from "../layouts/PageLayout";
+import AllMeetings from "../components/AllMeetings";
 
 const MeetingsPage = () => {
     const [isSearchOpen, setSearchOpen] = useState(false);
@@ -68,10 +67,11 @@ const MeetingsPage = () => {
                     color="blue"
                 />
             </div>
-
+            {/* <QuickStats /> */}
             <MeetingTabs />
+            <AllMeetings />
 
-            <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
+            {/* <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
                 <div className="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
                     <BiCalendarX size={32} className="text-gray-400" />
                 </div>
@@ -85,9 +85,7 @@ const MeetingsPage = () => {
                     <MdOutlineSchedule size={18} />
                     Schedule Meeting
                 </button>
-            </div>
-
-            <QuickStats />
+            </div> */}
         </PageLayout>
     );
 };
