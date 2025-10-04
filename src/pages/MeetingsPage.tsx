@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { FaSearch, FaTimes } from "react-icons/fa";
 import { MdOutlineSchedule, MdPersonAdd, MdVideoCall } from "react-icons/md";
 import AllMeetings from "../components/AllMeetings";
 import { CalendarFAB } from "../components/CalendarFAB";
 import MeetingTabs from "../components/MeetingTabs";
 import QuickActionButton from "../components/QuickActionButton";
+import { SearchFAB } from "../components/SearchFAB";
+import { SearchInput } from "../components/SearchInput";
 import PageLayout from "../layouts/PageLayout";
 
 const MeetingsPage = () => {
@@ -27,31 +28,18 @@ const MeetingsPage = () => {
         <PageLayout
             title="📞 Meetings"
             actionButton={
-                <button
-                    onClick={toggleSearch}
-                    className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-                    aria-label={isSearchOpen ? "Close search" : "Open search"}
-                >
-                    {isSearchOpen ? (
-                        <FaTimes size={20} className="dark:text-gray-300" />
-                    ) : (
-                        <FaSearch size={20} className="dark:text-gray-300" />
-                    )}
-                </button>
+                <SearchFAB
+                    isSearchOpen={isSearchOpen}
+                    onToggle={toggleSearch}
+                />
             }
         >
             {isSearchOpen && (
-                <div className="w-full mb-4">
-                    <input
-                        type="text"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search for meetings..."
-                        className="w-full px-3 py-2 bg-white dark:bg-gray-800 border rounded-lg 
-                                   focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all 
-                                   dark:text-white dark:border-gray-600"
-                    />
-                </div>
+                <SearchInput
+                    value={searchQuery}
+                    onChange={setSearchQuery}
+                    placeholder="Search for meetings..."
+                />
             )}
             <div className="grid grid-cols-3 gap-4 mb-8">
                 <QuickActionButton
@@ -77,7 +65,6 @@ const MeetingsPage = () => {
             <MeetingTabs />
             <AllMeetings />
 
-            {/* Clean usage with CalendarFAB */}
             <CalendarFAB onClick={handleCalendarClick} />
         </PageLayout>
     );
