@@ -13,9 +13,9 @@ const QuickActionButton = ({
     description,
     color,
 }: QuickActionButtonProps) => (
-    <div className="flex flex-col items-center gap-3 text-center p-4 bg-white dark:bg-gray-800 rounded-3xl shadow-sm hover:shadow-md transition-shadow">
+    <div className="flex flex-col items-center  text-center p-2 bg-white dark:bg-gray-800 rounded-xl shadow-3xl hover:shadow-md transition-shadow">
         <button
-            className={`rounded-3xl bg-${color}-600 hover:bg-${color}-700 p-4 text-white transition-colors`}
+            className={`rounded-xl bg-${color}-600 hover:bg-${color}-700 p-2 text-white transition-colors`}
         >
             {icon}
         </button>
