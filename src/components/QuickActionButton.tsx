@@ -21,7 +21,7 @@ const QuickActionButton = ({
     };
 
     return (
-        <div className="flex flex-col items-center text-center p-3 bg-white dark:bg-gray-800 rounded-xl shadow-3xl hover:shadow-md transition-shadow">
+        <div className="flex flex-col items-center text-center p-3 gap-2 bg-white dark:bg-gray-800 rounded-xl shadow-3xl hover:shadow-md transition-shadow">
             <button
                 className={`rounded-2xl ${colorClasses[color]} p-3 text-white transition-colors`}
             >
