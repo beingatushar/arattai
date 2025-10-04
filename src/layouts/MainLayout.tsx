@@ -18,7 +18,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     });
 
     return (
-        <div className="relative min-h-screen bg-gray-100 dark:bg-gray-900 overflow-x-hidden">
+        <div className="relative min-h-dvh bg-gray-100 dark:bg-gray-900 overflow-x-hidden">
             <Sidebar />
 
             {/* Gesture Handle to OPEN sidebar */}
