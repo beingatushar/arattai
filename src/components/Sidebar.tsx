@@ -38,7 +38,7 @@ const Sidebar = () => {
             </div>
 
             {/* Links Section */}
-            <nav className="flex-grow p-4">
+            <nav className="flex-grow p-4 overflow-y-auto">
                 <ul className="space-y-2">
                     {navLinks.map((link) => {
                         const Icon = link.icon;
