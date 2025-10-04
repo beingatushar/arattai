@@ -39,7 +39,7 @@ const MeetingsPage = () => {
             {isSearchOpen && (
                 <SearchInput
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={setSearchQuery}
                     placeholder="Search for meetings..."
                 />
             )}
