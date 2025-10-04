@@ -1,4 +1,4 @@
-import { FaUserFriends, FaCog } from "react-icons/fa";
+import { FaCog, FaUserFriends } from "react-icons/fa";
 import {
     FaAt,
     FaBookmark,
@@ -16,6 +16,7 @@ export const navItems = [
     { id: "chat", label: "Chat", icon: FaMessage },
     { id: "calls", label: "Calls", icon: FaPhone },
 ];
+
 export const navLinks = [
     { name: "Mentions", icon: FaAt },
     { name: "Starred messages", icon: FaStar },

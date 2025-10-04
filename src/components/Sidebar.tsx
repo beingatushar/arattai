@@ -1,12 +1,12 @@
 import { useDrag } from "@use-gesture/react";
-import { FaMoon, FaTimes, FaUserCircle } from "react-icons/fa";
+import { FaTimes, FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { navLinks } from "../constants";
 import { useUI } from "../hooks/useUI";
+import { NightModeToggle } from "./common/NightModeToggle";
 
 const Sidebar = () => {
-    const { isSidebarOpen, closeSidebar, isNightMode, toggleNightMode } =
-        useUI();
+    const { isSidebarOpen, closeSidebar } = useUI();
 
     const bindCloseGesture = useDrag(({ last, movement: [mx] }) => {
         if (last && mx < -50) {
@@ -58,22 +58,7 @@ const Sidebar = () => {
             </nav>
 
             <div className="p-6 border-t border-gray-700">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                        <FaMoon className="w-6 h-6 mr-4" />
-                        <span className="text-base">Night mode</span>
-                    </div>
-                    <button
-                        onClick={toggleNightMode}
-                        className={`w-14 h-7 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300
-                            ${isNightMode ? "bg-blue-500" : "bg-gray-600"}`}
-                    >
-                        <div
-                            className={`bg-white w-5 h-5 rounded-full shadow-md transform transition-transform duration-300
-                                ${isNightMode ? "translate-x-7" : ""}`}
-                        ></div>
-                    </button>
-                </div>
+                <NightModeToggle />
             </div>
         </aside>
     );

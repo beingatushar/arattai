@@ -1,57 +1,10 @@
-import { useMemo, useState } from "react";
 import { IoMdCall } from "react-icons/io";
+import { MdAddIcCall } from "react-icons/md";
 import { SearchFAB } from "../components/SearchFAB";
 import { SearchInput } from "../components/SearchInput";
+import { useCalls } from "../hooks/useCalls";
 import PageLayout from "../layouts/PageLayout";
-import { MdAddIcCall } from "react-icons/md";
-
-// Define a type for a single call item
-type Call = {
-    id: number;
-    name: string;
-    avatar: string;
-    type: "incoming" | "outgoing" | "missed";
-    timestamp: Date; // Changed to Date object for easier manipulation
-};
-
-// Mock data with Date objects for timestamps
-const MOCK_CALLS: Call[] = [
-    {
-        id: 1,
-        name: "Maria K.",
-        avatar: "https://picsum.photos/seed/user2/200/200",
-        type: "missed",
-        timestamp: new Date("2025-10-04T15:30:00"), // Yesterday
-    },
-    {
-        id: 2,
-        name: "Alex G.",
-        avatar: "https://picsum.photos/seed/user1/200/200",
-        type: "outgoing",
-        timestamp: new Date("2025-10-05T11:15:00"), // Today
-    },
-    {
-        id: 3,
-        name: "Sam R.",
-        avatar: "https://picsum.photos/seed/user3/200/200",
-        type: "incoming",
-        timestamp: new Date("2025-10-03T20:00:00"), // October 3, 2025
-    },
-    {
-        id: 4,
-        name: "John D.",
-        avatar: "https://picsum.photos/seed/user4/200/200",
-        type: "incoming",
-        timestamp: new Date("2025-10-04T09:20:00"), // Yesterday
-    },
-    {
-        id: 5,
-        name: "Maria K.",
-        avatar: "https://picsum.photos/seed/user2/200/200",
-        type: "incoming",
-        timestamp: new Date("2025-10-05T09:05:00"), // Today
-    },
-];
+import type { Call } from "../types/calls";
 
 // Helper function to format time
 const formatTime = (date: Date) => {
@@ -59,64 +12,20 @@ const formatTime = (date: Date) => {
 };
 
 const CallsPage = () => {
-    const [filter, setFilter] = useState<"all" | "missed">("all");
-    const [searchQuery, setSearchQuery] = useState("");
-    const [isSearchOpen, setSearchOpen] = useState(false);
-    const [calls] = useState<Call[]>(MOCK_CALLS);
+    const {
+        groupedCalls,
+        filter,
+        setFilter,
+        searchQuery,
+        setSearchQuery,
+        isSearchOpen,
+        toggleSearch,
+    } = useCalls();
 
     const filters: { id: "all" | "missed"; label: string }[] = [
         { id: "all", label: "All" },
         { id: "missed", label: "Missed" },
     ];
-
-    const toggleSearch = () => {
-        setSearchOpen((prev) => !prev);
-        if (isSearchOpen) {
-            setSearchQuery("");
-        }
-    };
-
-    const filteredCalls = useMemo(() => {
-        return calls
-            .filter((call) => {
-                if (filter === "missed") return call.type === "missed";
-                return true;
-            })
-            .filter((call) =>
-                call.name.toLowerCase().includes(searchQuery.toLowerCase())
-            );
-    }, [filter, searchQuery, calls]);
-
-    // Group calls by date
-    const groupedCalls = useMemo(() => {
-        const groups: { [key: string]: Call[] } = {};
-        const today = new Date("2025-10-05T12:03:00"); // Using provided current time for consistency
-        const yesterday = new Date(today);
-        yesterday.setDate(yesterday.getDate() - 1);
-
-        filteredCalls.forEach((call) => {
-            const callDate = call.timestamp;
-            let groupKey: string;
-
-            if (callDate.toDateString() === today.toDateString()) {
-                groupKey = "Today";
-            } else if (callDate.toDateString() === yesterday.toDateString()) {
-                groupKey = "Yesterday";
-            } else {
-                groupKey = callDate.toLocaleDateString([], {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                });
-            }
-
-            if (!groups[groupKey]) {
-                groups[groupKey] = [];
-            }
-            groups[groupKey].push(call);
-        });
-        return groups;
-    }, [filteredCalls]);
 
     const getCallIcon = (type: Call["type"]) => {
         // Return an icon based on the call type
@@ -142,7 +51,6 @@ const CallsPage = () => {
         return null;
     };
 
-    // JSX rendering logic...
     return (
         <PageLayout
             title="📞 Calls"
@@ -156,12 +64,11 @@ const CallsPage = () => {
             {isSearchOpen && (
                 <SearchInput
                     value={searchQuery}
-                    onChange={setSearchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search for calls..."
                 />
             )}
 
-            {/* Filter Buttons */}
             <div className="flex flex-row gap-2 my-4">
                 {filters.map(({ id, label }) => (
                     <button
@@ -178,7 +85,6 @@ const CallsPage = () => {
                 ))}
             </div>
 
-            {/* Grouped Call List */}
             <div className="flex flex-col gap-4">
                 {Object.entries(groupedCalls).map(([date, callsInGroup]) => (
                     <div key={date}>
@@ -186,7 +92,7 @@ const CallsPage = () => {
                             {date}
                         </h2>
                         <div className="flex flex-col gap-2">
-                            {callsInGroup.map((call) => (
+                            {(callsInGroup as Call[]).map((call) => (
                                 <div
                                     key={call.id}
                                     className="w-full p-3 flex items-center gap-4 bg-white dark:bg-gray-800 rounded-xl"
@@ -233,7 +139,6 @@ const CallsPage = () => {
                 ))}
             </div>
 
-            {/* New Call FAB */}
             <button
                 className="fixed bottom-20 right-4 bg-green-600 hover:bg-green-700 text-white p-4 rounded-full shadow-lg flex items-center transition-colors z-40 transform hover:scale-105"
                 aria-label="New call"

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { MdOutlineSchedule, MdPersonAdd, MdVideoCall } from "react-icons/md";
 import AllMeetings from "../components/AllMeetings";
 import { CalendarFAB } from "../components/CalendarFAB";
@@ -6,23 +5,26 @@ import MeetingTabs from "../components/MeetingTabs";
 import QuickActionButton from "../components/QuickActionButton";
 import { SearchFAB } from "../components/SearchFAB";
 import { SearchInput } from "../components/SearchInput";
+import { useMeetings } from "../hooks/useMeetings";
 import PageLayout from "../layouts/PageLayout";
 
 const MeetingsPage = () => {
-    const [isSearchOpen, setSearchOpen] = useState(false);
-    const [searchQuery, setSearchQuery] = useState("");
-
-    const toggleSearch = () => {
-        setSearchOpen((prev) => !prev);
-        if (isSearchOpen) {
-            setSearchQuery("");
-        }
-    };
+    const {
+        meetings,
+        isSearchOpen,
+        toggleSearch,
+        searchQuery,
+        setSearchQuery,
+    } = useMeetings();
 
     const handleCalendarClick = () => {
         console.log("Calendar button clicked");
-        // Add your calendar logic here
     };
+
+    const meetingTabs = [
+        { id: "upcoming", label: "Upcoming" },
+        { id: "previous", label: "Previous" },
+    ];
 
     return (
         <PageLayout
@@ -37,7 +39,7 @@ const MeetingsPage = () => {
             {isSearchOpen && (
                 <SearchInput
                     value={searchQuery}
-                    onChange={setSearchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search for meetings..."
                 />
             )}
@@ -62,8 +64,8 @@ const MeetingsPage = () => {
                 />
             </div>
 
-            <MeetingTabs />
-            <AllMeetings />
+            <MeetingTabs tabs={meetingTabs} />
+            <AllMeetings meetings={meetings} />
 
             <CalendarFAB onClick={handleCalendarClick} />
         </PageLayout>

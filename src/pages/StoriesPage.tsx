@@ -2,11 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import ActionButtons from "../components/ActionButtons";
 import MyStoryCard from "../components/MyStoryCard";
 import { SearchFAB } from "../components/SearchFAB";
-import StoryGrid from "../components/StoryGrid";
-import { MOCK_STORIES } from "../data/stories";
-import PageLayout from "../layouts/PageLayout";
-import type { Story } from "../types";
 import { SearchInput } from "../components/SearchInput";
+import StoryGrid from "../components/StoryGrid";
+import PageLayout from "../layouts/PageLayout";
+import { fetchStories } from "../services/api";
+import type { Story } from "../types";
 
 const StoriesPage = () => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -15,12 +15,13 @@ const StoriesPage = () => {
     const [isSearchOpen, setSearchOpen] = useState(false);
 
     useEffect(() => {
-        setIsLoading(true);
-        const timer = setTimeout(() => {
-            setStories(MOCK_STORIES);
+        const getStories = async () => {
+            const fetchedStories = (await fetchStories()) as Story[];
+            setStories(fetchedStories);
             setIsLoading(false);
-        }, 1500);
-        return () => clearTimeout(timer);
+        };
+
+        getStories();
     }, []);
 
     const filteredStories = useMemo(

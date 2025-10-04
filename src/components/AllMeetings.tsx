@@ -1,7 +1,7 @@
 import { BiUser } from "react-icons/bi";
 import { IoMdTime } from "react-icons/io";
+import type { Meeting } from "../types/meetings";
 
-// Reusable Meeting Detail Item Component
 const MeetingDetailItem = ({
     icon,
     text,
@@ -15,7 +15,6 @@ const MeetingDetailItem = ({
     </div>
 );
 
-// Reusable Meeting Duration Component
 const MeetingDuration = ({ duration }: { duration: string }) => (
     <MeetingDetailItem
         icon={
@@ -25,7 +24,6 @@ const MeetingDuration = ({ duration }: { duration: string }) => (
     />
 );
 
-// Reusable Meeting Organizer Component
 const MeetingOrganizer = ({ organizer }: { organizer: string }) => (
     <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
         <div className="w-5 h-5 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center">
@@ -35,7 +33,6 @@ const MeetingOrganizer = ({ organizer }: { organizer: string }) => (
     </div>
 );
 
-// Reusable Meeting Card Component
 const MeetingCard = ({
     date,
     title,
@@ -59,24 +56,7 @@ const MeetingCard = ({
     </div>
 );
 
-// Main AllMeetings Component
-const AllMeetings = () => {
-    const meetings = [
-        {
-            date: "Sat, 4 Oct 2025, 10:23 PM",
-            title: "Meeting - 04/10/2025",
-            duration: "7 seconds",
-            organizer: "You",
-        },
-        // Add more meetings here easily
-        {
-            date: "Sun, 5 Oct 2025, 2:00 PM",
-            title: "Team Sync",
-            duration: "30 minutes",
-            organizer: "Project Manager",
-        },
-    ];
-
+const AllMeetings = ({ meetings }: { meetings: Meeting[] }) => {
     return (
         <div className="flex flex-col gap-3">
             {meetings.map((meeting, index) => (
