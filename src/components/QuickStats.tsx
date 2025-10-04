@@ -1,7 +1,7 @@
 import { BiGroup, BiTime } from "react-icons/bi";
 
 const QuickStats = () => (
-    <div className="mt-8 grid grid-cols-2 gap-4">
+    <div className="mb-8 grid grid-cols-2 gap-4">
         <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
             <div className="flex items-center gap-3">
                 <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
