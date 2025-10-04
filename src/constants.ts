@@ -13,7 +13,7 @@ import { SlCalender } from "react-icons/sl";
 export const navItems = [
     { id: "stories", label: "Stories", icon: LiaPaletteSolid },
     { id: "meetings", label: "Meetings", icon: SlCalender },
-    { id: "chat", label: "Chat", icon: FaMessage },
+    { id: "chats", label: "Chats", icon: FaMessage },
     { id: "calls", label: "Calls", icon: FaPhone },
 ];
 

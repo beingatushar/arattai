@@ -10,7 +10,7 @@ export const ChatHeader = ({ name, avatar }: ChatHeaderProps) => {
     return (
         <header className="flex items-center justify-between p-4 bg-gray-800 text-white">
             <div className="flex items-center gap-4">
-                <Link to="/chat">
+                <Link to="/chats">
                     <FaArrowLeft />
                 </Link>
                 <img

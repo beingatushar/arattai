@@ -1,7 +1,18 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { routes } from "../routes";
+import Navbar from "./Navbar";
 
 const MainScreen = () => {
+    const location = useLocation(); // To trigger re-render on location change
+
+    // Define routes where navbar should be visible
+    const navbarRoutes = ["/stories", "/meetings", "/chats", "/calls"];
+
+    // Check if current path should show navbar
+    const shouldShowNavbar = navbarRoutes.some((route) =>
+        location.pathname.startsWith(route)
+    );
+
     return (
         <main className="flex-grow bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 overflow-y-auto">
             <Routes>
@@ -24,6 +35,8 @@ const MainScreen = () => {
                     }
                 />
             </Routes>
+            {/* Show Navbar only on specific routes */}
+            {shouldShowNavbar && <Navbar />}
         </main>
     );
 };
